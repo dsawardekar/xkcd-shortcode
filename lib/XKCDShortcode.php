@@ -28,11 +28,13 @@ class XKCDShortcode {
 
   function renderJSON($json) {
     $src = $json->img;
-    $alt = $json->alt;
+    $alt = $json->title;
+    $transcript = $json->transcript;
 
     $html  = '<img ';
     $html .= 'src="' . $src . '" ';
     $html .= 'alt="' . $alt . '" ';
+    $html .= 'title="' . $transcript . '" ';
     $html .= 'class="img img-xkcd" ';
     $html .= '>';
 

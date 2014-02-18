@@ -12,6 +12,23 @@ class XKCDShortcodePluginTest extends WP_UnitTestCase {
     $this->plugin->disable();
   }
 
+  function getMatcherForComic($num) {
+    $loader = new XKCDLoader();
+    $json = $loader->load($num);
+
+    $matcher = array(
+      'tag' => 'img',
+      'attributes' => array(
+        'src' => $json->img,
+        'alt' => $json->title,
+        'title' => $json->transcript,
+        'class' => 'img img-xkcd'
+      )
+    );
+
+    return $matcher;
+  }
+
   function test_it_registers_an_xkcd_shortcode() {
     $this->plugin->enable();
     $this->assertTrue(shortcode_exists('xkcd'));
@@ -27,36 +44,14 @@ class XKCDShortcodePluginTest extends WP_UnitTestCase {
   }
 
   function test_it_shows_current_xkcd_comic_from_shortcode() {
-    $loader = new XKCDLoader();
-    $json = $loader->load();
-
-    $matcher = array(
-      'tag' => 'img',
-      'attributes' => array(
-        'src' => $json->img,
-        'alt' => $json->alt,
-        'class' => 'img img-xkcd'
-      )
-    );
-
+    $matcher = $this->getMatcherForComic(null);
     $this->plugin->enable();
     $html = do_shortcode('[xkcd]');
     $this->assertTag($matcher, $html);
   }
 
   function test_it_shows_specified_xkcd_comic_from_shortcode() {
-    $loader = new XKCDLoader();
-    $json = $loader->load(101);
-
-    $matcher = array(
-      'tag' => 'img',
-      'attributes' => array(
-        'src' => $json->img,
-        'alt' => $json->alt,
-        'class' => 'img img-xkcd'
-      )
-    );
-
+    $matcher = $this->getMatcherForComic(101);
     $this->plugin->enable();
     $html = do_shortcode("[xkcd num='101']");
     $this->assertTag($matcher, $html);
