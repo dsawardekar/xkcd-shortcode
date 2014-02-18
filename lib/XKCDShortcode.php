@@ -18,7 +18,12 @@ class XKCDShortcode {
 
       return $this->renderJSON($json);
     } catch (Exception $e) {
-      return '<p class="error error-xkcd">' . $e->getMessage() . '</p>';
+      $message = $e->getMessage();
+      if (preg_match('/404/', $message)) {
+        $message = 'Unknown XKCD Comic: ' . $params['num'];
+      }
+
+      return '<p class="error error-xkcd">' . $message . '</p>';
     }
   }
 
@@ -28,15 +33,24 @@ class XKCDShortcode {
 
   function renderJSON($json) {
     $src = $json->img;
-    $alt = $json->title;
-    $transcript = $json->transcript;
+    $href = 'http://xkcd.com/' . $json->num;
 
-    $html  = '<img ';
+    // alt in html => title in json
+    $alt = $json->title;
+
+    // title in html => alt in json
+    $title = $json->alt;
+
+    $html  = '<a href="' . $href . '" ';
+    $html .= 'class="link-xkcd" ';
+    $html .= '>';
+    $html .= '<img ';
     $html .= 'src="' . $src . '" ';
     $html .= 'alt="' . $alt . '" ';
-    $html .= 'title="' . $transcript . '" ';
+    $html .= 'title="' . $title . '" ';
     $html .= 'class="img img-xkcd" ';
     $html .= '>';
+    $html .= '</a>';
 
     return $html;
   }

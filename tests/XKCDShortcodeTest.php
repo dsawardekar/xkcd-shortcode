@@ -22,21 +22,21 @@ class XKCDShortcodeTest extends WP_UnitTestCase {
   }
 
   function test_it_renders_img_src_from_json() {
-    $json = $this->json('{ "img": "comic-src", "title": "comic-title", "transcript": "" }');
+    $json = $this->json('{ "img": "comic-src", "title": "comic-title", "alt": "" }');
     $html = $this->shortcode->renderJSON($json);
 
     $this->assertRegExp('/src="comic-src"/', $html);
   }
 
   function test_it_renders_alt_tag_from_json() {
-    $json = $this->json('{ "img": "comic-src", "title": "comic-alt", "transcript": "" }');
+    $json = $this->json('{ "img": "comic-src", "title": "comic-alt", "alt": "" }');
     $html = $this->shortcode->renderJSON($json);
 
     $this->assertRegExp('/alt="comic-alt"/', $html);
   }
 
   function test_it_renders_title_tag_from_json() {
-    $json = $this->json('{ "img": "comic-src", "title": "comic-alt", "transcript": "comic-transcript" }');
+    $json = $this->json('{ "img": "comic-src", "title": "comic-alt", "alt": "comic-transcript" }');
     $html = $this->shortcode->renderJSON($json);
 
     $this->assertRegExp('/title="comic-transcript"/', $html);

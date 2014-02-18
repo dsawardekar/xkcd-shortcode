@@ -21,7 +21,7 @@ class XKCDShortcodePluginTest extends WP_UnitTestCase {
       'attributes' => array(
         'src' => $json->img,
         'alt' => $json->title,
-        'title' => $json->transcript,
+        'title' => $json->alt,
         'class' => 'img img-xkcd'
       )
     );
@@ -60,7 +60,7 @@ class XKCDShortcodePluginTest extends WP_UnitTestCase {
   function test_it_shows_error_for_unknown_comic() {
     $this->plugin->enable();
     $html = do_shortcode("[xkcd num='1000000']");
-    $this->assertRegExp("/XKCDLoader Failed/", $html);
+    $this->assertRegExp("/Unknown XKCD Comic/", $html);
   }
 }
 
