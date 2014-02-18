@@ -1,0 +1,10 @@
+{
+  "lib/*.php": {
+    "type": "library",
+    "test": "tests/%sTest.php"
+  },
+  "tests/*Test.php": {
+    "type": "test",
+    "alternate": "lib/%s.php"
+  }
+}
