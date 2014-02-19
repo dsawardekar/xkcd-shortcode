@@ -18,12 +18,12 @@ to embed the [XKCD](http://xkcd.com) webcomic into your posts and pages.
 It takes a `num` attribute that specifies the number of the XKCD comic
 to embed. For Eg:- To embed the 100th comic use,
 
-`[xkcd num='100']`
+        [xkcd num='100']
 
 When the `num` attribute is omitted the latest XKCD comic is shown
 instead.
 
-`[xkcd]`
+        [xkcd]
 
 == Installation ==
 
@@ -46,6 +46,13 @@ No. The images are hotlinked to the [XKCD website](http://xkcd.com)
 1. The XKCD Webcomic #1 embedded in a Post.
 
 == Changelog ==
+
+= 0.7 =
+
+* Fixes readme.
+
+= 0.6 =
+* Fixes usage with scatter_deploy.
 
 = 0.1 =
 * Initial Release
