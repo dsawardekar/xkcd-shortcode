@@ -2,7 +2,7 @@
 /*
 Plugin Name: xkcd-shortcode
 Description: Adds an [xkcd] shortcode that loads the XKCD webcomic by number.
-Version: 0.6
+Version: 0.7
 Author: Darshan Sawardekar
 Author URI: http://pressing-matters.io/
 Plugin URI: http://wordpress.org/plugins/xkcd-shortcode
