@@ -41,16 +41,11 @@ class XKCDShortcode {
     // title in html => alt in json
     $title = $json->alt;
 
-    $html  = '<a href="' . $href . '" ';
-    $html .= 'class="link-xkcd" ';
-    $html .= '>';
-    $html .= '<img ';
-    $html .= 'src="' . $src . '" ';
-    $html .= 'alt="' . $alt . '" ';
-    $html .= 'title="' . $title . '" ';
-    $html .= 'class="img img-xkcd" ';
-    $html .= '>';
-    $html .= '</a>';
+    $html = <<<EOT
+      <a href="$href" class="link-xkcd">
+        <img src="$src" alt="$alt" title="$title" class="img img-xkcd">
+      </a>
+EOT;
 
     return $html;
   }
