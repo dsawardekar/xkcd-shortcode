@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . '/XKCDLoader.php');
+require_once(__DIR__ . '/CachedXKCDLoader.php');
 
 class XKCDShortcode {
   public $loader;
@@ -9,7 +10,7 @@ class XKCDShortcode {
   );
 
   function __construct() {
-    $this->loader = new XKCDLoader();
+    $this->loader = new CachedXKCDLoader(new XKCDLoader());
   }
 
   function render($params) {
