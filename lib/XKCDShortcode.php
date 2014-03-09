@@ -14,9 +14,9 @@ class XKCDShortcode {
 
   function render($params) {
     try {
-      $params = $this->parse($params);
+      $params   = $this->parse($params);
       $xkcd_num = $params['num'];
-      $json = $this->loader->load($xkcd_num);
+      $json     = $this->load($xkcd_num);
 
       return $this->renderJSON($json);
     } catch (Exception $e) {
@@ -31,6 +31,10 @@ class XKCDShortcode {
 
   function parse($params) {
     return shortcode_atts($this->defaults, $params);
+  }
+
+  function load($xkcd_num) {
+    return $this->loader->load($xkcd_num);
   }
 
   function renderJSON($json) {
