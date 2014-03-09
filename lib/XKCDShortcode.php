@@ -3,6 +3,7 @@
 require_once(__DIR__ . '/XKCDLoader.php');
 
 class XKCDShortcode {
+  public $loader;
   public $defaults = array(
     "num" => null
   );
@@ -14,13 +15,14 @@ class XKCDShortcode {
   function render($params) {
     try {
       $params = $this->parse($params);
-      $json = $this->loader->load($params['num']);
+      $xkcd_num = $params['num'];
+      $json = $this->loader->load($xkcd_num);
 
       return $this->renderJSON($json);
     } catch (Exception $e) {
       $message = $e->getMessage();
       if (preg_match('/404/', $message)) {
-        $message = 'Unknown XKCD Comic: ' . $params['num'];
+        $message = 'Unknown XKCD Comic: ' . $xkcd_num;
       }
 
       return '<p class="error error-xkcd">' . $message . '</p>';
