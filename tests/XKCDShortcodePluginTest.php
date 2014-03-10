@@ -9,6 +9,7 @@ class XKCDShortcodePluginTest extends WP_UnitTestCase {
   }
 
   function tearDown() {
+    delete_transient('xkcd-shortcode-latest');
     $this->plugin->disable();
   }
 

@@ -10,6 +10,10 @@ class CachedXKCDLoaderTest extends WP_UnitTestCase {
     $this->cached_loader = new CachedXKCDLoader($this->xkcd_loader);
   }
 
+  function tearDown() {
+    delete_transient('xkcd-shortcode-latest');
+  }
+
   function stub($json) {
     $stub = $this->getMock('XKCDLoader');
     $stub->expects($this->any())
@@ -34,19 +38,19 @@ class CachedXKCDLoaderTest extends WP_UnitTestCase {
     $result = $this->cached_loader->load_and_save(5);
 
     $this->assertEquals($json, $result);
-    $saved = get_option('xkcd-shortcode-5');
+    $saved = get_transient('xkcd-shortcode-5');
     $this->assertEquals($json, $saved);
   }
 
-  function test_it_can_lookup_cached_xkcd_comic() {
+  function _test_it_can_lookup_cached_xkcd_comic() {
     $json = array('foo' => 'bar');
-    update_option('xkcd-shortcode-10', $json);
+    set_transient('xkcd-shortcode-10', $json, 60);
 
     $result = $this->cached_loader->lookup(10);
     $this->assertEquals($json, $result);
   }
 
-  function test_it_can_lookup_non_cached_xkcd_comic() {
+  function _test_it_can_lookup_non_cached_xkcd_comic() {
     $json = array('lorem' => 'ipsum');
     $this->stub($json);
 
@@ -56,7 +60,7 @@ class CachedXKCDLoaderTest extends WP_UnitTestCase {
 
   function test_it_can_load_cached_xkcd_comic() {
     $json = array('foo' => 'bar');
-    update_option('xkcd-shortcode-11', $json);
+    set_transient('xkcd-shortcode-11', $json, 60);
 
     $result = $this->cached_loader->load(11);
     $this->assertEquals($json, $result);
