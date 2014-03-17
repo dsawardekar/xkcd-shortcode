@@ -2,10 +2,15 @@
 
 class XKCDLoader {
   function load($num = null) {
-    $result = wp_remote_get($this->build($num));
-    $body = $this->verify($result);
+    $url    = $this->build($num);
+    $result = $this->fetch($url);
+    $body   = $this->verify($result);
 
     return $this->parse($body);
+  }
+
+  function fetch($url) {
+    return wp_remote_get($url);
   }
 
   function verify($result) {

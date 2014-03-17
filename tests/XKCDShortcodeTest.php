@@ -7,6 +7,10 @@ class XKCDShortcodeTest extends WP_UnitTestCase {
     $this->shortcode = new XKCDShortcode();
   }
 
+  function tearDown() {
+    delete_transient('xkcd-shortcode-latest');
+  }
+
   function json($text) {
     return json_decode($text);
   }
