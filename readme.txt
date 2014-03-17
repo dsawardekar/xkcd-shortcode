@@ -4,7 +4,7 @@ Donate link: http://pressing-matters.io/
 Tags: xkcd, shortcode
 Requires at least: 3.5.0
 Tested up to: 3.8.1
-Stable tag: 0.7
+Stable tag: 0.8.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,11 @@ No. The images are hotlinked to the [XKCD website](http://xkcd.com)
 1. The XKCD Webcomic #1 embedded in a Post.
 
 == Changelog ==
+
+= 0.8.0 =
+
+* Adds caching. Comics are now cached as transients.
+* Fixes version numbering
 
 = 0.7 =
 
